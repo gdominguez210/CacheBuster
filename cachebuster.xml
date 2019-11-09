@@ -3,11 +3,11 @@
 <extension version="2.5" type="plugin" group="system" method="upgrade">
 	<name>plg_system_cachebuster</name>
 	<license>Open Source License, GPL v2 based</license>
-	<author>Gary Dominguez, Directive Technology Inc.</author>
-	<authorEmail>webteam@directive.com</authorEmail>
-	<authorUrl>https://www.joomconnect.com</authorUrl>
+	<author>Gary Dominguez</author>
+	<authorEmail>gdominguez210@live.com</authorEmail>
+	<authorUrl>https://www.garydominguez.com</authorUrl>
 	<creationDate>May 2019</creationDate>
-	<copyright>2019 www.directive.com</copyright>
+	<copyright>2019 Gary Dominguez</copyright>
 	<version>1.0.0</version>
 	<description>PLG_CACHEBUST_DESCRIPTION</description>
 	<scriptfile>cachebuster.install.php</scriptfile>

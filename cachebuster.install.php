@@ -2,9 +2,9 @@
 /*------------------------------------------------------------------------
 # plg_system_cachebuster - Cachebusting Plugin for Stylesheets
 # ------------------------------------------------------------------------
-# author    Directive Technology Inc.
-# copyright Copyright (C) 2019 www.directive.com. All Rights Reserved.
-# Websites: https://www.directive.com/
+# author    Gary Dominguez
+# copyright Copyright (C) 2019 www.garydominguez.com. All Rights Reserved.
+# Websites: https://www.garydominguez.com/
 # @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 -------------------------------------------------------------------------*/
 

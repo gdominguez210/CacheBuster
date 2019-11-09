@@ -2,9 +2,9 @@
 /*------------------------------------------------------------------------
 # plg_system_cachebuster - Cachebusting Plugin for Stylesheets
 # ------------------------------------------------------------------------
-# author    Directive Technology Inc.
-# copyright Copyright (C) 2019 www.directive.com. All Rights Reserved.
-# Website: https://www.directive.com
+# author    Gary Dominguez
+# copyright Copyright (C) 2019 www.garydominguez.com. All Rights Reserved.
+# Website: https://www.garydominguez.com
 # @license - http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 -------------------------------------------------------------------------*/
 
@@ -69,33 +69,16 @@ class plgSystemCacheBuster extends JPlugin
             $uri = JUri::getInstance($searchUrl);
             $searchUrl = $uri->toString(array('path'));
 			
-		/*	if  (strstr($url, $searchURL)) { //search for instance of filepath specified in plugin field
-				   if ($this->params->get('querystring_lm')) { //if plugin is set to use last-modified-date query string
-				   	$filename = $searchURL; //shorthand for the filename to use the filemtime function on
-					clearstatcache(); //makes sure we're getting fresh php stats
-                    $newurl = $url.'?v='.filemtime($filename); // joins the path set in the plugin with the ?v=last-modified-date-timestamp
-				}
-			}*/
 	    	$filepath = $url;
 			$firstcharinpath = substr ($filepath, 0, 1);
 			if ($firstcharinpath == '/') {
 			$filepath = substr_replace ($filepath, "", 0, 1);
 			}
-			/*if ($firstcharinpath == '/') {
-			    $filepath = str_replace($firstcharinpath, "", $filepath);
-			}*/
 			clearstatcache();
 			$filetime = filemtime($filepath);
 			if (in_array($searchUrl,$paths)) {
 			    $url = $searchUrl .'?v='. $filetime; 
 			}
-			/*echo "<pre>";
-			echo "filepath: "; var_dump($filepath);
-		    echo "last-modified-date: ";var_dump($filetime);
-		    echo "first character in filepath: ";var_dump($firstcharinpath);
-		    echo "new modified filepath: ";var_dump($url);
-		    echo "<hr>";
-		    echo "</pre>";*/
             $qsStylesheets[$url] = $stylesheetparams; //fill array
         }
        
