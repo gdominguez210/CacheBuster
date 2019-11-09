@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+	<name>plg_system_cachebuster</name>
+	<license>Open Source License, GPL v2 based</license>
+	<author>Gary Dominguez, Directive Technology Inc.</author>
+	<authorEmail>webteam@directive.com</authorEmail>
+	<authorUrl>https://www.joomconnect.com</authorUrl>
+	<creationDate>May 2019</creationDate>
+	<copyright>2019 www.directive.com</copyright>
+	<version>1.0.0</version>
+	<description>PLG_CACHEBUST_DESCRIPTION</description>
+	<scriptfile>cachebuster.install.php</scriptfile>
+	<files>
+		<filename plugin="cachebuster">cachebuster.php</filename>
+		<folder>language</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			    <field name="cssfile" type="radio" default="0" label="Add Custom Stylesheet?" description="Add your own stylesheet" class="btn-group btn-group-yesno">
+				    <option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			     <field name="cssfilepath" type="textarea" showon="cssfile:1" default="" hint="templates/template_name/custom.css" label="CSS URL" description="Type the relative URL of the file you would like to add." cols="60" rows="10">
+             </field>
+				<field name="querystring_lm" type="radio" default="1" label="PLG_CACHEBUST_QUERYSTRING_LM" description="PLG_CACHEBUST_QUERYSTRING_LM_DESC" class="btn-group btn-group-yesno">
+				    <option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+	            <field name="stylesheets_to_handle" type="textarea" cols="60" rows="10" default="" filter="raw"  class="input-xxlarge"
+	            	label="PLG_CACHEBUST_STYLESHEETS" 
+	            	description="PLG_CACHEBUST_STYLESHEETS_DESC" />	
+			</fieldset>
+		</fields>
+	</config>
+</extension>
