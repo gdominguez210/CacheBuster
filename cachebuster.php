@@ -14,44 +14,48 @@ jimport('joomla.plugin.plugin');
 jimport('joomla.environment.browser');
 jimport('joomla.filesystem.file');
 
-class plgSystemCacheBuster extends JPlugin
-{
+class plgSystemCacheBuster extends JPlugin{
 
-	public function __construct(& $subject, $params = array())
-	{
+	public function __construct(& $subject, $params = array()){
 		parent::__construct( $subject, $params );
 	}
 
-	function onBeforeCompileHead()
-	{
+	function onBeforeCompileHead(){
+
 		//error_reporting(E_ALL);
 		$app = JFactory::getApplication('site');
-		if ( $app->isAdmin()) return; //Exit if in administration
+		if ( $app->isAdmin()) return;
 		$doc = JFactory::getDocument();
         $paths = array();
-        $filepaths = array();
-	    if ($this->params->get('cssfile', '0') == 1) {
-	        $stylesheets_to_add = trim( (string) $this->params->get('cssfilepath', ''));
-	        $filepaths = array_map('trim', (array) explode("\n", $stylesheets_to_add));
-	        foreach ($filepaths as $path) {
-	        $doc->addStyleSheet($path);
-	        }
-	    }
-		$stylesheets_to_handle = trim( (string) $this->params->get('stylesheets_to_handle', ''));
+		$filepaths = array();
 		
-		if ($stylesheets_to_handle) {
+	    if ($this->params->get('cssfile', '0') == 1){
+
+	        $stylesheets_to_add = trim((string) $this->params->get('cssfilepath', ''));
+			$filepaths = array_map('trim', (array) explode("\n", $stylesheets_to_add));
+			
+	        foreach ($filepaths as $path) {
+	        	$doc->addStyleSheet($path);
+			}
+			
+		}
+		
+		$stylesheets_to_handle = trim((string) $this->params->get('stylesheets_to_handle', ''));
+		
+		if ($stylesheets_to_handle){
+
 			$paths = array_map('trim', (array) explode("\n", $stylesheets_to_handle));
+
 			foreach ($paths as $path) {
 
-				if (strpos($path,'http')===0) {
+				if (strpos($path,'http')===0){
 					continue;
 				}
 				
 				$path = trim($path);
-
-				//Get the path only
 				$uri = JUri::getInstance($path);
 				$pathonly = $uri->toString(array('path'));
+
 				if ($pathonly != $path) {
 					$paths[] = $pathonly;
 				}
@@ -62,7 +66,7 @@ class plgSystemCacheBuster extends JPlugin
 		
 		$qsStylesheets = array();
 	
-        foreach ($doc->_styleSheets as $url => $stylesheetparams) {
+        foreach ($doc->_styleSheets as $url => $stylesheetparams){
 
             //Get the path only
             $searchUrl = trim($url);
@@ -70,19 +74,23 @@ class plgSystemCacheBuster extends JPlugin
             $searchUrl = $uri->toString(array('path'));
 			
 	    	$filepath = $url;
-			$firstcharinpath = substr ($filepath, 0, 1);
-			if ($firstcharinpath == '/') {
-			$filepath = substr_replace ($filepath, "", 0, 1);
+			$firstcharinpath = substr($filepath, 0, 1);
+
+			if ($firstcharinpath == '/'){
+				$filepath = substr_replace($filepath, "", 0, 1);
 			}
+
 			clearstatcache();
 			$filetime = filemtime($filepath);
-			if (in_array($searchUrl,$paths)) {
+
+			if (in_array($searchUrl,$paths)){
 			    $url = $searchUrl .'?v='. $filetime; 
 			}
+
             $qsStylesheets[$url] = $stylesheetparams; //fill array
         }
        
 		$doc->_styleSheets = $qsStylesheets;
-		 return true;
+		return true;
 	}
 }
